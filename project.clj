@@ -8,9 +8,11 @@
                  [ring/ring-defaults "0.2.1"]
                  [ring/ring-json "0.4.0"]
                  [clj-http "3.9.0"]
+                 [org.clojure/tools.logging "0.4.1"]
                  [org.clojure/data.json "0.2.6"]]
   :plugins [[lein-ring "0.9.7"]]
-  :ring {:handler trasporto.handler/app}
+  :ring {:handler trasporto.handler/app
+         :auto-reload? true}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring/ring-mock "0.3.0"]]}})
