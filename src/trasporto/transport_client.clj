@@ -22,6 +22,11 @@
     (log/info "get line stops: url:" url)
     (basic-http-post base-url url)))
 
+(defn get-lines []
+  (let [url "tpPortal/tpl/journeyPatterns"]
+    (log/info "get lines: url:" url)
+    (basic-http-post base-url url)))
+
 (defn get-stop [stop-code]
   (let [url (str "tpPortal/geodata/pois/stops/" (Integer/parseInt stop-code))]
     (log/info "get line stops: url:" url)

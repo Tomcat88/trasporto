@@ -10,6 +10,7 @@
 
 (defroutes app-routes
   (GET "/" [] (response {:foo "bar"}))
+  (GET "/lines" [raw] (t-routes/lines-route raw))
   (GET "/line/:line/stops" [line direction raw]
        (t-routes/line-stops-route line direction raw))
   (GET "/stop/:code" [code raw]
