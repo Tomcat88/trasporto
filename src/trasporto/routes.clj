@@ -6,13 +6,19 @@
 
 (defn wrap-ct-json [res] (header res "Content-Type" "application/json"))
 
+(defn add-cors-headers [response]
+  (-> response
+      (header "Access-Control-Allow-Origin" "*")
+      (header "Access-Control-Allow-Methods" "GET,POST,DELETE,OPTIONS")
+      (header "Access-Control-Allow-Headers" "access-control-allow-origin")))
+
 (defn json-ex [status msg] (-> {:status status :msg msg}
                                json/write-str
                                response
                                wrap-ct-json))
 
 (defn finalize-response [res raw convert-f]
-  (-> (response (json/write-str (if raw res (convert-f res)))) wrap-ct-json))
+  (-> (response (json/write-str (if raw res (convert-f res)))) wrap-ct-json add-cors-headers))
 
 
 (defn line-stops-route [line direction raw]
