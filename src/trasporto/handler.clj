@@ -15,6 +15,7 @@
   (OPTIONS "/line/:line/stops" [] (t-routes/add-cors-headers (response {"Allow" "GET"})))
   (GET     "/line/:line/stops" [line direction raw]
            (t-routes/line-stops-route line direction raw))
+  (OPTIONS "/stop/:code" [] (t-routes/add-cors-headers (response {"Allow" "GET"})))
   (GET     "/stop/:code" [code raw]
            (t-routes/stop-route code raw))
   (route/not-found "Not Found"))
