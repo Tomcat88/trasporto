@@ -9,15 +9,17 @@
             [trasporto.routes :as t-routes]))
 
 (defroutes app-routes
-  (GET     "/" [] (response {:foo "bar"}))
-  (OPTIONS "/lines" [] (t-routes/add-cors-headers (response {"Allow" "GET"})))
-  (GET     "/lines" [raw] (t-routes/lines-route raw))
-  (OPTIONS "/line/:line/stops" [] (t-routes/add-cors-headers (response {"Allow" "GET"})))
+  (GET     "/" []  (response {:foo "bar"}))
+  (OPTIONS "/*" [] (t-routes/add-cors-headers (response {"Allow" "GET"})))
+  
+  (GET     "/lines" [raw]
+           (t-routes/lines-route raw))
   (GET     "/line/:line/stops" [line direction raw]
            (t-routes/line-stops-route line direction raw))
-  (OPTIONS "/stop/:code" [] (t-routes/add-cors-headers (response {"Allow" "GET"})))
   (GET     "/stop/:code" [code raw]
            (t-routes/stop-route code raw))
+  (GET     "/stop/:stop/line/:line/timetable" [stop line direction raw]
+           (t-routes/timetable-route stop line direction raw))
   (route/not-found "Not Found"))
 
 (def app

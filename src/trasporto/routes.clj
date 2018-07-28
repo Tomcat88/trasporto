@@ -1,6 +1,6 @@
 (ns trasporto.routes
   (:require [clojure.tools.logging :as log]
-            [trasporto.transport-client :refer [get-line-stops get-stop get-lines]]
+            [trasporto.transport-client :refer [get-line-stops get-stop get-lines get-timetable]]
             [ring.util.response :refer [response header]]
             [clojure.data.json :as json]))
 
@@ -41,6 +41,14 @@
 
 (defn lines-route [raw]
   (try (let [res (get-lines)]
+         (log/info res)
+         (finalize-response res raw identity))
+       (catch Throwable t
+         (log/error t)
+         (json-ex 500 (.getMessage t)))))
+
+(defn timetable-route [stop-code line-code direction raw]
+  (try (let [res (get-timetable stop-code line-code direction)]
          (log/info res)
          (finalize-response res raw identity))
        (catch Throwable t
