@@ -16,10 +16,10 @@
            (t-routes/lines-route raw))
   (GET     "/line/:line/stops" [line direction raw]
            (t-routes/line-stops-route line direction raw))
+  (GET     "/line/:line/stop/:stop/timetable" [stop line direction raw]
+           (t-routes/timetable-route stop line direction raw))
   (GET     "/stop/:code" [code raw]
            (t-routes/stop-route code raw))
-  (GET     "/stop/:stop/line/:line/timetable" [stop line direction raw]
-           (t-routes/timetable-route stop line direction raw))
   (route/not-found "Not Found"))
 
 (def app
