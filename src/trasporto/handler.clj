@@ -20,7 +20,7 @@
            (t-routes/timetable-route stop line direction raw))
   (GET     "/stop/:code" [code raw]
            (t-routes/stop-route code raw))
-  (route/not-found "Not Found"))
+  (route/not-found (response {:error "resource not found"})))
 
 (def app
   (-> app-routes

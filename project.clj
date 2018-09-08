@@ -9,6 +9,7 @@
                  [ring/ring-json "0.4.0"]
                  [clj-http "3.9.0"]
                  [org.clojure/tools.logging "0.4.1"]
+                 [log4j/log4j "1.2.17"]
                  [org.clojure/data.json "0.2.6"]]
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler trasporto.handler/app
